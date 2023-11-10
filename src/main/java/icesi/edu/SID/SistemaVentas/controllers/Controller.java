@@ -10,19 +10,25 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import icesi.edu.SID.SistemaVentas.models.CategoryProduct;
 import icesi.edu.SID.SistemaVentas.models.Customer;
+import icesi.edu.SID.SistemaVentas.models.CustomerDetails;
 import icesi.edu.SID.SistemaVentas.models.Order;
 import icesi.edu.SID.SistemaVentas.models.OrderDetail;
 import icesi.edu.SID.SistemaVentas.models.Product;
 import icesi.edu.SID.SistemaVentas.services.CategoryProductService;
+import icesi.edu.SID.SistemaVentas.services.CustomerDetailsService;
 import icesi.edu.SID.SistemaVentas.services.CustomerService;
 import icesi.edu.SID.SistemaVentas.services.OrderDetailService;
 import icesi.edu.SID.SistemaVentas.services.OrderService;
 import icesi.edu.SID.SistemaVentas.services.ProductService;
 
+@RestController
+@RequestMapping("/")
 public class Controller {
     
     private CategoryProductService categoryProductService;
@@ -30,9 +36,39 @@ public class Controller {
     private OrderDetailService orderDetailService;
     private OrderService orderService;
     private ProductService productService;
+    private CustomerDetailsService customerDetailsService;
 
     public Controller(){
 
+    }
+
+    @GetMapping("/listCustomerDetails")
+    public ResponseEntity<List<CustomerDetails>> listCustomerDetails(){
+        List<CustomerDetails> customerDetails = new ArrayList<>();
+        return new ResponseEntity<>(customerDetails, HttpStatus.OK);
+    }
+
+    @GetMapping("/getCustomerDetails")
+    public ResponseEntity<CustomerDetails> getCustomerDetails(@RequestParam("id") String id){
+        CustomerDetails customerDetails = new CustomerDetails();
+        return new ResponseEntity<>(customerDetails, HttpStatus.OK);
+    }
+
+    @PostMapping("/postCustomerDetails")
+    public ResponseEntity<CustomerDetails> postCustomerDetails(@RequestBody CustomerDetails customerDetails){
+        CustomerDetails customerDetailsAdded = new CustomerDetails();
+        return new ResponseEntity<>(customerDetailsAdded, HttpStatus.OK);
+    }
+
+    @PutMapping("/updateCustomerDetails")
+    public ResponseEntity<CustomerDetails> updateCustomerDetails(@RequestBody CustomerDetails customerDetails){
+        CustomerDetails customerDetailsUpdated = new CustomerDetails();
+        return new ResponseEntity<>(customerDetailsUpdated, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/deleteCustomerDetails")
+    public ResponseEntity<Void> deleteCategoryProduct(@RequestParam("id") String id){
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @GetMapping("/listCategoryProducts")
@@ -60,7 +96,7 @@ public class Controller {
     }
 
     @DeleteMapping("/deleteCategoryProduct")
-    public ResponseEntity<CategoryProduct> deleteCategoryProduct(@RequestParam("code") long code){
+    public ResponseEntity<Void> deleteCategoryProduct(@RequestParam("code") long code){
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
