@@ -1,13 +1,17 @@
 package icesi.edu.SID.SistemaVentas.models;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import lombok.NoArgsConstructor;
 
 import java.sql.Date;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class Customer {
     @Id

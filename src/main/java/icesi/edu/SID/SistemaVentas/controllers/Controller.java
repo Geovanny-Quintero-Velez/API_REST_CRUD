@@ -1,226 +1,193 @@
 package icesi.edu.SID.SistemaVentas.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import icesi.edu.SID.SistemaVentas.models.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
-import icesi.edu.SID.SistemaVentas.models.CategoryProduct;
-import icesi.edu.SID.SistemaVentas.models.Customer;
-import icesi.edu.SID.SistemaVentas.models.CustomerDetails;
-import icesi.edu.SID.SistemaVentas.models.Order;
-import icesi.edu.SID.SistemaVentas.models.OrderDetail;
-import icesi.edu.SID.SistemaVentas.models.Product;
-import icesi.edu.SID.SistemaVentas.services.CategoryProductService;
-import icesi.edu.SID.SistemaVentas.services.CustomerDetailsService;
-import icesi.edu.SID.SistemaVentas.services.CustomerService;
-import icesi.edu.SID.SistemaVentas.services.OrderDetailService;
-import icesi.edu.SID.SistemaVentas.services.OrderService;
-import icesi.edu.SID.SistemaVentas.services.ProductService;
+import icesi.edu.SID.SistemaVentas.services.Impl.*;
 
 @RestController
 @RequestMapping("/")
 public class Controller {
     
-    private CategoryProductService categoryProductService;
-    private CustomerService customerService;
-    private OrderDetailService orderDetailService;
-    private OrderService orderService;
-    private ProductService productService;
-    private CustomerDetailsService customerDetailsService;
+    private CategoryProductServiceImpl categoryProductService;
+    private CustomerServiceImpl customerService;
+    private OrderDetailServiceImpl orderDetailService;
+    private OrderServiceImpl orderService;
+    private ProductServiceImpl productService;
+    private CustomerDetailsServiceImpl customerDetailsService;
 
-    public Controller(){
-
+    @Autowired
+    public Controller(CategoryProductServiceImpl categoryProductService, CustomerServiceImpl customerService,
+                      OrderDetailServiceImpl orderDetailService, OrderServiceImpl orderService,
+                      ProductServiceImpl productService, CustomerDetailsServiceImpl customerDetailsService) {
+        this.categoryProductService = categoryProductService;
+        this.customerService = customerService;
+        this.orderDetailService = orderDetailService;
+        this.orderService = orderService;
+        this.productService = productService;
+        this.customerDetailsService = customerDetailsService;
     }
 
-    @GetMapping("/listCustomerDetails")
-    public ResponseEntity<List<CustomerDetails>> listCustomerDetails(){
-        List<CustomerDetails> customerDetails = new ArrayList<>();
-        return new ResponseEntity<>(customerDetails, HttpStatus.OK);
+    // Métodos para la entidad CategoryProduct
+    @GetMapping("/categories")
+    public List<CategoryProduct> getAllCategories() {
+        return categoryProductService.getAllCategories();
     }
 
-    @GetMapping("/getCustomerDetails")
-    public ResponseEntity<CustomerDetails> getCustomerDetails(@RequestParam("id") String id){
-        CustomerDetails customerDetails = new CustomerDetails();
-        return new ResponseEntity<>(customerDetails, HttpStatus.OK);
+    @GetMapping("/categories/{id}")
+    public CategoryProduct getCategoryById(@PathVariable Long id) {
+        return categoryProductService.getCategoryById(id);
     }
 
-    @PostMapping("/postCustomerDetails")
-    public ResponseEntity<CustomerDetails> postCustomerDetails(@RequestBody CustomerDetails customerDetails){
-        CustomerDetails customerDetailsAdded = new CustomerDetails();
-        return new ResponseEntity<>(customerDetailsAdded, HttpStatus.OK);
+    @PostMapping("/categories")
+    public CategoryProduct createCategory(@RequestBody CategoryProduct categoryProduct) {
+        return categoryProductService.createCategory(categoryProduct);
     }
 
-    @PutMapping("/updateCustomerDetails")
-    public ResponseEntity<CustomerDetails> updateCustomerDetails(@RequestBody CustomerDetails customerDetails){
-        CustomerDetails customerDetailsUpdated = new CustomerDetails();
-        return new ResponseEntity<>(customerDetailsUpdated, HttpStatus.OK);
+    @PutMapping("/categories/{id}")
+    public CategoryProduct updateCategory(@PathVariable Long id, @RequestBody CategoryProduct categoryProduct) {
+        return categoryProductService.updateCategory(id, categoryProduct);
     }
 
-    @DeleteMapping("/deleteCustomerDetails")
-    public ResponseEntity<Void> deleteCategoryProduct(@RequestParam("id") String id){
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    @DeleteMapping("/categories/{id}")
+    public void deleteCategory(@PathVariable Long id) {
+        categoryProductService.deleteCategory(id);
     }
 
-    @GetMapping("/listCategoryProducts")
-    public ResponseEntity<List<CategoryProduct>> listCategoryProducts(){
-        List<CategoryProduct> categoryProducts = new ArrayList<>();
-        return new ResponseEntity<>(categoryProducts, HttpStatus.OK);
+    // Métodos para la entidad Customer
+    @GetMapping("/customers")
+    public List<Customer> getAllCustomers() {
+        return customerService.getAllCustomers();
     }
 
-    @GetMapping("/getCategoryProduct")
-    public ResponseEntity<CategoryProduct> getCategoryProduct(@RequestParam("code") long code){
-        CategoryProduct categoryProduct = new CategoryProduct();
-        return new ResponseEntity<>(categoryProduct, HttpStatus.OK);
+    @GetMapping("/customers/{id}")
+    public Customer getCustomerById(@PathVariable Long id) {
+        return customerService.getCustomerById(id);
     }
 
-    @PostMapping("/postCategoryProduct")
-    public ResponseEntity<CategoryProduct> postCategoryProduct(@RequestBody CategoryProduct categoryProduct){
-        CategoryProduct categoryProductAdded = new CategoryProduct();
-        return new ResponseEntity<>(categoryProductAdded, HttpStatus.OK);
+    @PostMapping("/customers")
+    public Customer createCustomer(@RequestBody Customer customer) {
+        return customerService.createCustomer(customer);
     }
 
-    @PutMapping("/updateCategoryProduct")
-    public ResponseEntity<CategoryProduct> updateCategoryProduct(@RequestBody CategoryProduct categoryProduct){
-        CategoryProduct categoryProductUpdated = new CategoryProduct();
-        return new ResponseEntity<>(categoryProductUpdated, HttpStatus.OK);
+    @PutMapping("/customers/{id}")
+    public Customer updateCustomer(@PathVariable Long id, @RequestBody Customer customer) {
+        return customerService.updateCustomer(id, customer);
     }
 
-    @DeleteMapping("/deleteCategoryProduct")
-    public ResponseEntity<Void> deleteCategoryProduct(@RequestParam("code") long code){
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    @DeleteMapping("/customers/{id}")
+    public void deleteCustomer(@PathVariable Long id) {
+        customerService.deleteCustomer(id);
     }
 
-    @GetMapping("/listCustomers")
-    public ResponseEntity<List<Customer>> listCustomers(){
-        List<Customer> customers = new ArrayList<>();
-        return new ResponseEntity<>(customers, HttpStatus.OK);
+    // Métodos para la entidad OrderDetail
+    @GetMapping("/orderdetails")
+    public List<OrderDetail> getAllOrderDetails() {
+        return orderDetailService.getAllOrderDetails();
     }
 
-    @GetMapping("/getCustomer")
-    public ResponseEntity<Customer> getCustomer(@RequestParam("id") long id){
-        Customer customer = new Customer();
-        return new ResponseEntity<>(customer, HttpStatus.OK);
-
+    @GetMapping("/orderdetails/{orderId}/{productId}")
+    public OrderDetail getOrderDetailById(@PathVariable Long orderId, @PathVariable Long productId) {
+        OrderDetailId orderDetailId = new OrderDetailId(orderId, productId);
+        return orderDetailService.getOrderDetailById(orderDetailId);
     }
 
-    @PostMapping("/postCustomer")
-    public ResponseEntity<Customer> postCustomer(@RequestBody Customer customer){
-        Customer customerAdded = new Customer();
-        return new ResponseEntity<>(customerAdded, HttpStatus.OK);
+    @PostMapping("/orderdetails")
+    public OrderDetail createOrderDetail(@RequestBody OrderDetail orderDetail) {
+        return orderDetailService.createOrderDetail(orderDetail);
     }
 
-    @PutMapping("/updateCustomer")
-    public ResponseEntity<Customer> updateCustomer(@RequestBody Customer customer){
-        Customer customerUpdated = new Customer();
-        return new ResponseEntity<>(customerUpdated, HttpStatus.OK);
+    @PutMapping("/orderdetails/{orderId}/{productId}")
+    public OrderDetail updateOrderDetail(@PathVariable Long orderId, @PathVariable Long productId, @RequestBody OrderDetail orderDetail) {
+        OrderDetailId orderDetailId = new OrderDetailId(orderId, productId);
+        return orderDetailService.updateOrderDetail(orderDetailId, orderDetail);
     }
 
-    @DeleteMapping("/deleteCustomer")
-    public ResponseEntity<Void> deleteCustomer(@RequestParam("id") long id){
-
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    @DeleteMapping("/orderdetails/{orderId}/{productId}")
+    public void deleteOrderDetail(@PathVariable Long orderId, @PathVariable Long productId) {
+        OrderDetailId orderDetailId = new OrderDetailId(orderId, productId);
+        orderDetailService.deleteOrderDetail(orderDetailId);
     }
 
-    @GetMapping("/listOrderDetail")
-    public ResponseEntity<List<OrderDetail>> listOrderDetails(){
-        List<OrderDetail> orderDetails = new ArrayList<>();
-        return new ResponseEntity<>(orderDetails, HttpStatus.OK);
+    // Métodos para la entidad Order
+    @GetMapping("/orders")
+    public List<Order> getAllOrders() {
+        return orderService.getAllOrders();
     }
 
-    @GetMapping("/getOrderDetail")
-    public ResponseEntity<OrderDetail> getOrderDetail(@RequestParam("orderNumber") long orderNumber, @RequestParam("productId") long productId){
-        OrderDetail orderDetail = new OrderDetail();
-        return new ResponseEntity<>(orderDetail, HttpStatus.OK);
-
+    @GetMapping("/orders/{id}")
+    public Order getOrderById(@PathVariable Long id) {
+        return orderService.getOrderById(id);
     }
 
-    @PostMapping("/postOrderDetail")
-    public ResponseEntity<OrderDetail> postOrderDetail(@RequestBody OrderDetail orderDetail){
-        OrderDetail orderDetailAdded = new OrderDetail();
-        return new ResponseEntity<>(orderDetailAdded, HttpStatus.OK);
+    @PostMapping("/orders")
+    public Order createOrder(@RequestBody Order order) {
+        return orderService.createOrder(order);
     }
 
-    @PutMapping("/updateOrderDetail")
-    public ResponseEntity<OrderDetail> updateOrderDetail(@RequestBody OrderDetail orderDetail){
-        OrderDetail orderDetailUpdated = new OrderDetail();
-        return new ResponseEntity<>(orderDetailUpdated, HttpStatus.OK);
+    @PutMapping("/orders/{id}")
+    public Order updateOrder(@PathVariable Long id, @RequestBody Order order) {
+        return orderService.updateOrder(id, order);
     }
 
-    @DeleteMapping("/deleteOrderDetail")
-    public ResponseEntity<Void> deleteOrderDetail(@RequestParam("orderNumber") long orderNumber, @RequestParam("productId") long productId){
-
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    @DeleteMapping("/orders/{id}")
+    public void deleteOrder(@PathVariable Long id) {
+        orderService.deleteOrder(id);
     }
 
-    @GetMapping("/listOrders")
-    public ResponseEntity<List<Order>> listOrders(){
-        List<Order> orders = new ArrayList<>();
-        return new ResponseEntity<>(orders, HttpStatus.OK);
+    // Métodos para la entidad Product
+    @GetMapping("/products")
+    public List<Product> getAllProducts() {
+        return productService.getAllProducts();
     }
 
-    @GetMapping("/getOrder")
-    public ResponseEntity<Order> getOrder(@RequestParam("orderNumber") long orderNumber){
-        Order order = new Order();
-        return new ResponseEntity<>(order, HttpStatus.OK);
-
+    @GetMapping("/products/{id}")
+    public Product getProductById(@PathVariable Long id) {
+        return productService.getProductById(id);
     }
 
-    @PostMapping("/postOrder")
-    public ResponseEntity<Order> postOrder(@RequestBody Order order){
-        Order orderAdded = new Order();
-        return new ResponseEntity<>(orderAdded, HttpStatus.OK);
+    @PostMapping("/products")
+    public Product createProduct(@RequestBody Product product) {
+        return productService.createProduct(product);
     }
 
-    @PutMapping("/updateOrder")
-    public ResponseEntity<Order> updateOrder(@RequestBody Order order){
-        Order orderUpdated = new Order();
-        return new ResponseEntity<>(orderUpdated, HttpStatus.OK);
+    @PutMapping("/products/{id}")
+    public Product updateProduct(@PathVariable Long id, @RequestBody Product product) {
+        return productService.updateProduct(id, product);
     }
 
-    @DeleteMapping("/deleteOrder")
-    public ResponseEntity<Void> deleteOrder(@RequestParam("orderNumber") long orderNumber){
-
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    @DeleteMapping("/products/{id}")
+    public void deleteProduct(@PathVariable Long id) {
+        productService.deleteProduct(id);
     }
 
-    @GetMapping("/listProducts")
-    public ResponseEntity<List<Product>> listProducts(){
-        List<Product> products = new ArrayList<>();
-        return new ResponseEntity<>(products, HttpStatus.OK);
+    // Métodos para la entidad CustomerDetails
+    @GetMapping("/customerdetails")
+    public List<CustomerDetails> getAllCustomerDetails() {
+        return customerDetailsService.getAllCustomerDetails();
     }
 
-    @GetMapping("/getProduct")
-    public ResponseEntity<Product> getProduct(@RequestParam("productId") long productId){
-        Product product = new Product();
-        return new ResponseEntity<>(product, HttpStatus.OK);
-
+    @GetMapping("/customerdetails/{id}")
+    public CustomerDetails getCustomerDetailsById(@PathVariable String id) {
+        return customerDetailsService.getCustomerDetailsById(id);
     }
 
-    @PostMapping("/postProduct")
-    public ResponseEntity<Product> postProduct(@RequestBody Product product){
-        Product productAdded = new Product();
-        return new ResponseEntity<>(productAdded, HttpStatus.OK);
+    @PostMapping("/customerdetails")
+    public CustomerDetails createCustomerDetails(@RequestBody CustomerDetails customerDetails) {
+        return customerDetailsService.createCustomerDetails(customerDetails);
     }
 
-    @PutMapping("/updateProduct")
-    public ResponseEntity<Product> updateProduct(@RequestBody Product product){
-        Product productUpdated = new Product();
-        return new ResponseEntity<>(productUpdated, HttpStatus.OK);
+    @PutMapping("/customerdetails/{id}")
+    public CustomerDetails updateCustomerDetails(@PathVariable String id, @RequestBody CustomerDetails customerDetails) {
+        return customerDetailsService.updateCustomerDetails(id, customerDetails);
     }
 
-    @DeleteMapping("/deleteProduct")
-    public ResponseEntity<Void> deleteProduct(@RequestParam("productId") long productId){
-
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    @DeleteMapping("/customerdetails/{id}")
+    public void deleteCustomerDetails(@PathVariable String id) {
+        customerDetailsService.deleteCustomerDetails(id);
     }
+
 }
