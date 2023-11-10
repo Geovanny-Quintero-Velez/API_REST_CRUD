@@ -1,13 +1,17 @@
 package icesi.edu.SID.SistemaVentas.models;
 
 import jakarta.persistence.Id;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.sql.Date;
 import java.util.List;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Document(collection = "customer_details")
 public class CustomerDetails {
     @Id
@@ -24,6 +28,8 @@ public class CustomerDetails {
 }
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 class Child {
     private String name;
     private Date birthDate;
@@ -35,6 +41,8 @@ class Child {
 }
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 class Birthplace {
     private String city;
     private String state;
@@ -43,6 +51,8 @@ class Birthplace {
 }
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 class Location {
     private String city;
     private String state;

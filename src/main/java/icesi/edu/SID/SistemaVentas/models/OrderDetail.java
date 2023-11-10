@@ -1,11 +1,13 @@
 package icesi.edu.SID.SistemaVentas.models;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-
-import java.io.Serializable;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 public class OrderDetail {
     @EmbeddedId
@@ -29,13 +31,3 @@ public class OrderDetail {
 
 }
 
-@Data
-@Embeddable
-public class OrderDetailId implements Serializable {
-    @Column(name = "OrderNumber")
-    private Long orderNumber;
-
-    @Column(name = "ProductId")
-    private Long productId;
-
-}
