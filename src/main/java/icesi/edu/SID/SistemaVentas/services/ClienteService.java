@@ -1,8 +1,8 @@
 package icesi.edu.SID.SistemaVentas.services;
 
-import icesi.edu.SID.SistemaVentas.models.Cliente;
-
 import java.util.*;
+
+import icesi.edu.SID.SistemaVentas.models.postgres.Cliente;
 
 public interface ClienteService {
     public Cliente crearCliente(Cliente cliente);

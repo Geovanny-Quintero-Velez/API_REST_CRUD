@@ -1,4 +1,4 @@
-package icesi.edu.SID.SistemaVentas.models;
+package icesi.edu.SID.SistemaVentas.models.mongodb;
 
 import jakarta.persistence.Id;
 import lombok.*;
@@ -8,7 +8,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(collection = "detallesCliente")
+@Document(collection = "detallesClientes")
 public class DetallesCliente {
     @Id
     private String id;
@@ -16,6 +16,6 @@ public class DetallesCliente {
     private List<Hijo> hijos;
     private Lugar residencia;
     private List<String> pasatiempos;
-    private List<String> categoriasDeInteres;
+    private List<Long> categoriasDeInteres;
 }
 

@@ -1,4 +1,4 @@
-package icesi.edu.SID.SistemaVentas.models;
+package icesi.edu.SID.SistemaVentas.models.mongodb;
 
 
 import lombok.AllArgsConstructor;

@@ -1,6 +1,6 @@
 package icesi.edu.SID.SistemaVentas.services.impl;
 
-import icesi.edu.SID.SistemaVentas.models.DetallesCliente;
+import icesi.edu.SID.SistemaVentas.models.mongodb.DetallesCliente;
 import icesi.edu.SID.SistemaVentas.repositories.DetallesClienteRepository;
 import icesi.edu.SID.SistemaVentas.services.DetallesClienteService;
 import org.springframework.beans.factory.annotation.Autowired;

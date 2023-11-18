@@ -1,9 +1,9 @@
 package icesi.edu.SID.SistemaVentas.services;
 
-import icesi.edu.SID.SistemaVentas.models.DetallesCliente;
-
 import java.util.List;
 import java.util.Optional;
+
+import icesi.edu.SID.SistemaVentas.models.mongodb.DetallesCliente;
 
 public interface DetallesClienteService {
     public DetallesCliente crearDetallesCliente(DetallesCliente detallesCliente);

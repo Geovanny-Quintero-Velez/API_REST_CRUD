@@ -1,6 +1,6 @@
 package icesi.edu.SID.SistemaVentas.services.impl;
 
-import icesi.edu.SID.SistemaVentas.models.Cliente;
+import icesi.edu.SID.SistemaVentas.models.postgres.Cliente;
 import icesi.edu.SID.SistemaVentas.repositories.ClienteRepository;
 import icesi.edu.SID.SistemaVentas.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
