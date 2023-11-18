@@ -1,6 +1,5 @@
 package icesi.edu.SID.SistemaVentas.controllers;
 
-import icesi.edu.SID.SistemaVentas.models.*;
 import icesi.edu.SID.SistemaVentas.models.mongodb.DetallesCliente;
 import icesi.edu.SID.SistemaVentas.models.postgres.Cliente;
 import icesi.edu.SID.SistemaVentas.models.postgres.DetalleOrden;
@@ -133,6 +132,8 @@ public class SistemaVentasController {
         DetalleOrden nuevoDetalleOrden = new DetalleOrden();
         nuevoDetalleOrden.setId(detalleOrdenId);
         Optional<Producto> producto = productoService.obtenerProductoPorId(ordenCompleta.getCodigoProducto());
+        if (producto.isPresent())
+            nuevoDetalleOrden.setProducto(producto.get());
         nuevoDetalleOrden.setOrden(ordenCreada);
         nuevoDetalleOrden.setCantidad(ordenCompleta.getCantidad());
         nuevoDetalleOrden.setPrecio(ordenCompleta.getPrecio());

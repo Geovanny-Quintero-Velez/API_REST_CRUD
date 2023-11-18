@@ -14,10 +14,10 @@ import lombok.NoArgsConstructor;
 @Embeddable
 public class DetalleOrdenId implements Serializable {
 
-    @Column(name = "numero_orden")
+    @Column(name = "numeroOrden")
     private Long numeroOrden;
 
-    @Column(name = "product_id")
+    @Column(name = "codigoProducto")
     private Long productId;
 
 }

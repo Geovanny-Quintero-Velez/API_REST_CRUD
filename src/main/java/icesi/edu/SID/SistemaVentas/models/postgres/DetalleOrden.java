@@ -26,6 +26,11 @@ public class DetalleOrden {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Orden orden;
 
+    @ManyToOne
+    @MapsId("codigoProducto")
+    @JoinColumn(name = "codigoProducto", referencedColumnName = "codigoProducto")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Producto producto;
 
 
     private Long cantidad;
