@@ -4,12 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import icesi.edu.SID.SistemaVentas.models.postgres.Cliente;
-import icesi.edu.SID.SistemaVentas.models.postgres.Orden;
 import icesi.edu.SID.SistemaVentas.models.postgres.Producto;
 import icesi.edu.SID.SistemaVentas.models.postgres.Categoria;
 import icesi.edu.SID.SistemaVentas.repositories.CategoriaRepository;
 import icesi.edu.SID.SistemaVentas.repositories.ClienteRepository;
-import icesi.edu.SID.SistemaVentas.repositories.OrdenRepository;
 import icesi.edu.SID.SistemaVentas.repositories.ProductoRepository;
 
 import javax.annotation.PostConstruct;
@@ -32,8 +30,6 @@ public class DataInitializer {
     @Autowired
     private CategoriaRepository categoriaRepository;
 
-    @Autowired
-    private OrdenRepository ordenRepository;
 
     @PostConstruct
     public void init() {
