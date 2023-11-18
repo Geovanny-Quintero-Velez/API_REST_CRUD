@@ -126,20 +126,27 @@ public class SistemaVentasController {
         nuevaOrden.setFechaPago(ordenCompleta.getFechaPago());
 
         Orden ordenCreada = ordenService.crearOrden(nuevaOrden);
-        
+
         // Instancia del detalle de la nueva orden
+
         DetalleOrdenId detalleOrdenId = new DetalleOrdenId(ordenCompleta.getNumeroOrden(), ordenCompleta.getCodigoProducto());
         DetalleOrden nuevoDetalleOrden = new DetalleOrden();
         nuevoDetalleOrden.setId(detalleOrdenId);
         Optional<Producto> producto = productoService.obtenerProductoPorId(ordenCompleta.getCodigoProducto());
-        if (producto.isPresent())
-            nuevoDetalleOrden.setProducto(producto.get());
+        if (producto.isPresent()){
+            Producto productoExistente = producto.get();
+            nuevoDetalleOrden.setProducto(productoExistente);
+            Long nuevaCantidad = productoExistente.getCantidadDisponible() - ordenCompleta.getCantidad();
+            productoExistente.setCantidadDisponible(nuevaCantidad);
+            productoService.actualizarProducto(ordenCompleta.getCodigoProducto(), productoExistente); //Restar la cantidad en Stock
+        }
+            
         nuevoDetalleOrden.setOrden(ordenCreada);
         nuevoDetalleOrden.setCantidad(ordenCompleta.getCantidad());
         nuevoDetalleOrden.setPrecio(ordenCompleta.getPrecio());
 
         DetalleOrden detalleOrdenCreado = detalleOrdenService.crearDetalleOrden(nuevoDetalleOrden);
-
+        
         if(detalleOrdenCreado != null){
             System.out.println("lo logramos");
         }else{
