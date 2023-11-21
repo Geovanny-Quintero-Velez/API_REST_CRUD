@@ -4,10 +4,8 @@ import WelcomeOptions from '../components/WelcomeOptions'
 
 const Welcome = () => {
 
-  const isTokenAvailable = localStorage.getItem('token') !== null;
-
   const handleLogout = () => {
-    localStorage.removeItem('token');
+    localStorage.removeItem('user');
     window.location.href = '/'; 
   };
 

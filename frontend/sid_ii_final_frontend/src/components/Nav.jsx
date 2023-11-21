@@ -7,8 +7,8 @@ const Nav = () => {
 
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
     localStorage.removeItem('user');
+    localStorage.removeItem('id');
     window.location.href = '/'; 
   };
 

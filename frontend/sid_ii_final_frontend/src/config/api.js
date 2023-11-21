@@ -4,23 +4,48 @@ const backend = axios.create({
     baseURL: 'http://localhost:8080', 
   });
 
-  const getToken = () => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      return 'Bearer ' + token;
-    }
-    return null
-  };
-
-export const login = async (formData) => {
+export const login = async (id) => {
     try {
-      const response = await backend.post('/auth', {
-        username: formData.username,
-        password: formData.password,
-      });
+      const response = await backend.get(`/api/clientes/${id}`);
       console.log(response.data)
-      return response.data;
+
+      const userExists = response.data && response.data.id;
+
+      if (userExists) {
+        return response.data;
+      } else {
+        throw new Error('Usuario no encontrado');
+      }
     } catch (error) {
       throw error
     }
 };
+
+export const addDetail = async (userDetail) => {
+  try {
+    const token = getToken();
+    const response = await backend.post('/api/detalles-cliente', userDetail);
+    return response.data;
+  }catch(error){
+    throw error
+  }
+}
+
+export const updateDetail = async (id,userDetail) => {
+  try {
+    const token = getToken();
+    const response = await backend.put(`/api/detalles-cliente/${id}`,userDetail);
+    return response.data;
+  }catch(error){
+    throw error
+  }
+}
+
+export const getDetail = async (id) => {
+  try {
+    const response = await backend.get(`/api/detalles-cliente/${id}`);
+    return response.data;
+  }catch(error){
+    throw error
+  }
+}

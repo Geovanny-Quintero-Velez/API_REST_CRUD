@@ -7,8 +7,7 @@ const Login = () => {
 
   const navigate = useNavigate()
   const [formData, setFormData] = useState({
-    username: '',
-    password: '',
+    Id: '',
   });
 
   const handleChange = (event) => {
@@ -24,11 +23,11 @@ const Login = () => {
 
     
     try {      
-      const result = await login(formData);
+      const result = await login(formData.Id);
       console.log('Respuesta del servidor:', result);
-      const token = result.token
-      localStorage.setItem('token', token);
-      const username = formData.username
+      const id = formData.Id 
+      localStorage.setItem('id',id)
+      const username = `${result.nombre}` 
       localStorage.setItem('user',username)
       navigate('/welcome')
     } catch (error) {
@@ -49,25 +48,14 @@ const Login = () => {
       <h2 className='font-semibold text-center mt-5 mb-5'>Iniciar Sesión</h2>
       <form onSubmit={handleSubmit} className='flex flex-col justify-center items-center'>
         <div className="form-group font-semibold text-center mt-5 flex flex-col items-cente" >
-          <label htmlFor="username">Nombre de Usuario</label>
+          <label htmlFor="Id">Identification</label>
           <input
             type="text"
-            id="username"
-            name="username"
-            value={formData.username}
+            id="Id"
+            name="Id"
+            value={formData.Id}
             onChange={handleChange}
             className='rounded-md mt-1 text-right font-normal border border-second'
-          />
-        </div>
-        <div className="form-group font-semibold text-center mt-5 flex flex-col items-center">
-          <label htmlFor="password">Contraseña</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            className='rounded-md mt-1 text-right font-normal  border border-second'
           />
         </div>
         <button type="submit" className='mt-10 py-1 px-1 bg-alter text-white font-semibold hover:bg-gray-50 hover:text-alter hover:font-semibold hover:border-alter hover:border w-3/5 rounded-md'>

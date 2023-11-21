@@ -5,6 +5,8 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import Login from './Login';
 import Welcome from '../pages/Welcome';
+import AdditionalDataPage from '../pages/AdditionalDataPage';
+import OrderPage from '../pages/OrderPage';
 
 function isToken(){
   const tok = localStorage.getItem('token')
@@ -28,8 +30,8 @@ const RoutesC = () => {
             <ProtectedRoute
               element={<Routes>
                 <Route path="/welcome" element={<Welcome></Welcome>} />
-                <Route path="/addData" element={<Welcome></Welcome>} />
-                <Route path="/makeOrder" element={<Welcome></Welcome>} />
+                <Route path="/addData" element={<AdditionalDataPage></AdditionalDataPage>} />
+                <Route path="/makeOrder" element={<OrderPage></OrderPage>} />
               </Routes>}
             />
           }
