@@ -23,7 +23,6 @@ export const login = async (id) => {
 
 export const addDetail = async (userDetail) => {
   try {
-    const token = getToken();
     const response = await backend.post('/api/detalles-cliente', userDetail);
     return response.data;
   }catch(error){
@@ -33,7 +32,6 @@ export const addDetail = async (userDetail) => {
 
 export const updateDetail = async (id,userDetail) => {
   try {
-    const token = getToken();
     const response = await backend.put(`/api/detalles-cliente/${id}`,userDetail);
     return response.data;
   }catch(error){
@@ -44,6 +42,42 @@ export const updateDetail = async (id,userDetail) => {
 export const getDetail = async (id) => {
   try {
     const response = await backend.get(`/api/detalles-cliente/${id}`);
+    return response.data;
+  }catch(error){
+    throw error
+  }
+}
+
+export const addOrderDetail = async (orderDetail) => {
+  try {
+    const response = await backend.post('/api/ordenes-detalle', orderDetail);
+    return response.data;
+  }catch(error){
+    throw error
+  }
+}
+
+export const addOrder = async (order) => {
+  try {
+    const response = await backend.post('/api/ordenes', order);
+    return response.data;
+  }catch(error){
+    throw error
+  }
+}
+
+export const getProducts = async () => {
+  try {
+    const response = await backend.get('/api/products');
+    return response.data;
+  }catch(error){
+    throw error
+  }
+}
+
+export const getCategories = async () => {
+  try {
+    const response = await backend.get('/api/categories');
     return response.data;
   }catch(error){
     throw error

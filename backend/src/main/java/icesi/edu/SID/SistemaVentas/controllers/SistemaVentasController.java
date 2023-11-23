@@ -6,6 +6,7 @@ import icesi.edu.SID.SistemaVentas.models.postgres.DetalleOrden;
 import icesi.edu.SID.SistemaVentas.models.postgres.DetalleOrdenId;
 import icesi.edu.SID.SistemaVentas.models.postgres.Orden;
 import icesi.edu.SID.SistemaVentas.models.postgres.Producto;
+import icesi.edu.SID.SistemaVentas.models.postgres.Categoria;
 import icesi.edu.SID.SistemaVentas.models.OrdenCompleta;
 import icesi.edu.SID.SistemaVentas.services.impl.*;
 import org.springframework.beans.factory.annotation.*;
@@ -129,29 +130,7 @@ public class SistemaVentasController {
 
         // Instancia del detalle de la nueva orden
 
-        DetalleOrdenId detalleOrdenId = new DetalleOrdenId(ordenCompleta.getNumeroOrden(), ordenCompleta.getCodigoProducto());
-        DetalleOrden nuevoDetalleOrden = new DetalleOrden();
-        nuevoDetalleOrden.setId(detalleOrdenId);
-        Optional<Producto> producto = productoService.obtenerProductoPorId(ordenCompleta.getCodigoProducto());
-        if (producto.isPresent()){
-            Producto productoExistente = producto.get();
-            nuevoDetalleOrden.setProducto(productoExistente);
-            Long nuevaCantidad = productoExistente.getCantidadDisponible() - ordenCompleta.getCantidad();
-            productoExistente.setCantidadDisponible(nuevaCantidad);
-            productoService.actualizarProducto(ordenCompleta.getCodigoProducto(), productoExistente); //Restar la cantidad en Stock
-        }
-            
-        nuevoDetalleOrden.setOrden(ordenCreada);
-        nuevoDetalleOrden.setCantidad(ordenCompleta.getCantidad());
-        nuevoDetalleOrden.setPrecio(ordenCompleta.getPrecio());
-
-        DetalleOrden detalleOrdenCreado = detalleOrdenService.crearDetalleOrden(nuevoDetalleOrden);
         
-        if(detalleOrdenCreado != null){
-            System.out.println("lo logramos");
-        }else{
-            System.out.println("no lo logramos");
-        }
 
         return new ResponseEntity<>(ordenCompleta, HttpStatus.CREATED);
     }
@@ -194,5 +173,61 @@ public class SistemaVentasController {
     public ResponseEntity<Void> eliminarOrden(@PathVariable Long id) {
         ordenService.eliminarOrden(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    //------- Ordenes de DetalleDeProducto -------
+
+    @PostMapping("ordenes-detalle")
+    public ResponseEntity<DetalleOrdenCompleto> crearDetalleOrden(@RequestBody DetalleOrdenCompleto detalleOrden) {
+
+        // Instancia del detalle de la nueva orden
+
+        DetalleOrdenId detalleOrdenId = new DetalleOrdenId(detalleOrden.getNumeroOrden(), detalleOrden.getCodigoProducto());
+        DetalleOrden nuevoDetalleOrden = new DetalleOrden();
+        nuevoDetalleOrden.setId(detalleOrdenId);
+        Optional<Producto> producto = productoService.obtenerProductoPorId(detalleOrden.getCodigoProducto());
+        if (producto.isPresent()){
+            Producto productoExistente = producto.get();
+            nuevoDetalleOrden.setProducto(productoExistente);
+            Long nuevaCantidad = productoExistente.getCantidadDisponible() - detalleOrden.getCantidad();
+            productoExistente.setCantidadDisponible(nuevaCantidad);
+            productoService.actualizarProducto(detalleOrden.getCodigoProducto(), productoExistente); //Restar la cantidad en Stock
+        }
+            
+        nuevoDetalleOrden.setOrden(detalleOrden.getNumeroOrden());
+        nuevoDetalleOrden.setCantidad(detalleOrden.getCantidad());
+        nuevoDetalleOrden.setPrecio(detalleOrden.getPrecio());
+
+        DetalleOrden detalleOrdenCreado = detalleOrdenService.crearDetalleOrden(nuevoDetalleOrden);
+        
+        if(detalleOrdenCreado != null){
+            System.out.println("lo logramos");
+        }else{
+            System.out.println("no lo logramos");
+        }
+
+        return new ResponseEntity<>(detalleOrdenCreado, HttpStatus.CREATED);
+    }
+
+    //------- productos -------
+    @Autowired
+    private ProductoServiceImpl productService;
+
+    // Endpoint para obtener todos los clientes
+    @GetMapping("products")
+    public ResponseEntity<List<Producto>> obtenerTodosLosProductos() {
+        List<Producto> productos = productService.obtenerTodosLosProductos();
+        return new ResponseEntity<>(productos, HttpStatus.OK);
+    }
+
+    //------- CATEGORIAS -------
+    @Autowired
+    private CategoryServiceImpl categoryService;
+
+    // Endpoint para obtener todos los clientes
+    @GetMapping("categories")
+    public ResponseEntity<List<Categoria>> obtenerTodosLasCategorias() {
+        List<Categoria> categorias = categoryService.obtenerTodosLasCategorias();
+        return new ResponseEntity<>(categorias, HttpStatus.OK);
     }
 }
