@@ -1,13 +1,10 @@
 package icesi.edu.SID.SistemaVentas.controllers;
 
-import icesi.edu.SID.SistemaVentas.models.mongodb.DetallesCliente;
-import icesi.edu.SID.SistemaVentas.models.postgres.Cliente;
-import icesi.edu.SID.SistemaVentas.models.postgres.DetalleOrden;
-import icesi.edu.SID.SistemaVentas.models.postgres.DetalleOrdenId;
-import icesi.edu.SID.SistemaVentas.models.postgres.Orden;
-import icesi.edu.SID.SistemaVentas.models.postgres.Producto;
-import icesi.edu.SID.SistemaVentas.models.postgres.Categoria;
-import icesi.edu.SID.SistemaVentas.models.OrdenCompleta;
+import icesi.edu.SID.SistemaVentas.models.mongodb.*;
+import icesi.edu.SID.SistemaVentas.models.postgres.*;
+import icesi.edu.SID.SistemaVentas.models.*;
+
+import icesi.edu.SID.SistemaVentas.services.OrdenService;
 import icesi.edu.SID.SistemaVentas.services.impl.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.http.*;
@@ -156,8 +153,8 @@ public class SistemaVentasController {
         Orden nuevaOrden = new Orden();
         nuevaOrden.setNumeroOrden(ordenCompleta.getNumeroOrden());
         Optional<Cliente> cliente = clienteService.obtenerClientePorId(ordenCompleta.getCodigoCliente());
-        if (cliente.isPresent())
-            nuevaOrden.setCliente(cliente.get());
+        cliente.ifPresent(nuevaOrden::setCliente);
+
         nuevaOrden.setFechaOrden(ordenCompleta.getFechaOrden());
         nuevaOrden.setFechaEnvio(ordenCompleta.getFechaEnvio());
         nuevaOrden.setFechaPago(ordenCompleta.getFechaPago());
@@ -178,23 +175,23 @@ public class SistemaVentasController {
     //------- Ordenes de DetalleDeProducto -------
 
     @PostMapping("ordenes-detalle")
-    public ResponseEntity<DetalleOrdenCompleto> crearDetalleOrden(@RequestBody DetalleOrdenCompleto detalleOrden) {
+    public ResponseEntity<DetalleOrden> crearDetalleOrden(@RequestBody DetalleOrdenCompleto detalleOrden) {
 
         // Instancia del detalle de la nueva orden
 
-        DetalleOrdenId detalleOrdenId = new DetalleOrdenId(detalleOrden.getNumeroOrden(), detalleOrden.getCodigoProducto());
+        DetalleOrdenId detalleOrdenId = new DetalleOrdenId(detalleOrden.getNumeroOrden(), detalleOrden.getProductId());
         DetalleOrden nuevoDetalleOrden = new DetalleOrden();
         nuevoDetalleOrden.setId(detalleOrdenId);
-        Optional<Producto> producto = productoService.obtenerProductoPorId(detalleOrden.getCodigoProducto());
+        Optional<Producto> producto = productoService.obtenerProductoPorId(detalleOrden.getProductId());
         if (producto.isPresent()){
             Producto productoExistente = producto.get();
             nuevoDetalleOrden.setProducto(productoExistente);
             Long nuevaCantidad = productoExistente.getCantidadDisponible() - detalleOrden.getCantidad();
             productoExistente.setCantidadDisponible(nuevaCantidad);
-            productoService.actualizarProducto(detalleOrden.getCodigoProducto(), productoExistente); //Restar la cantidad en Stock
+            productoService.actualizarProducto(detalleOrden.getProductId(), productoExistente); //Restar la cantidad en Stock
         }
-            
-        nuevoDetalleOrden.setOrden(detalleOrden.getNumeroOrden());
+        Optional<Orden> orden = ordenService.obtenerOrdenPorId(detalleOrden.getNumeroOrden());
+        orden.ifPresent(nuevoDetalleOrden::setOrden);
         nuevoDetalleOrden.setCantidad(detalleOrden.getCantidad());
         nuevoDetalleOrden.setPrecio(detalleOrden.getPrecio());
 

@@ -37,10 +37,10 @@ public class DataInitializer {
 
     @PostConstruct
     public void init() {
-        Categoria categoria1 = new Categoria(1L, "Ropa");
-        Categoria categoria2 = new Categoria(2L, "Electrónicos");
-        Categoria categoria3 = new Categoria(3L, "Aseo");
-        Categoria categoria4 = new Categoria(4L, "Comida");
+        Categoria categoria1 = new Categoria(1L, "Ropa", "");
+        Categoria categoria2 = new Categoria(2L, "Electrónicos", "");
+        Categoria categoria3 = new Categoria(3L, "Aseo", "");
+        Categoria categoria4 = new Categoria(4L, "Comida", "");
 
         categoriaRepository.saveAll(Arrays.asList(categoria1, categoria2, categoria3, categoria4));
 

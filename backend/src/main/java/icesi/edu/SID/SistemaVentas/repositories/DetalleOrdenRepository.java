@@ -4,7 +4,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import icesi.edu.SID.SistemaVentas.models.postgres.DetalleOrden;
 import icesi.edu.SID.SistemaVentas.models.postgres.DetalleOrdenId;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public interface DetalleOrdenRepository extends JpaRepository<DetalleOrden, DetalleOrdenId> {
     // Métodos personalizados si es necesario
 }

@@ -12,17 +12,17 @@ const InterestCategories = ({ register }) => {
   }, []);
 
   return (
-    <div className="mb-6">
-      <h3 className="text-lg font-semibold mb-4">Interest Categories</h3>
-      <label className="block mb-2">Select all that apply:</label>
-      <div className="grid grid-cols-2 gap-4">
+    <div className="mb-5 flex flex-col items-center">
+      <h3 className="text-lg font-semibold mb-2">Interest Categories</h3>
+      <label className="mb-4">Select all that apply:</label>
+      <div className="w-4/5 p-3 rounded-md border-alter border-2 justify-center grid grid-cols-2 gap-4">
         {categories.map((category) => (
           <label key={category} className="flex items-center">
             <input
               type="checkbox"
               {...register('interestCategories')}
               value={category}
-              className="mr-1"
+              className="mr-2 transform scale-150"
             />
             {category}
           </label>

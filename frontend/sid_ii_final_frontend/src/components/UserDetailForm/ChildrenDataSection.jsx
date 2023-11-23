@@ -14,43 +14,43 @@ const ChildrenDataSection = ({ control, register, remove }) => {
   
 
   return (
-    <div className="mb-6">
+    <div className="mb-7 flex justify-center flex-wrap">
         <h3 className="text-lg font-semibold mb-4">Children</h3>
         {childrenFields.map((child, index) => (
-          <div key={child.id} className="mb-4">
+          <div key={child.id} className="mb-5 flex justify-center flex-wrap">
             <input
               {...register(`children[${index}].name`)}
               placeholder={`Name ${index + 1}`}
-              className="border p-2 rounded"
+              className='w-4/5 mb-4 rounded-md border-alter border-2 hover:border-2 hover:border-alter'
             />
             <input
               {...register(`children[${index}].birthDate`)}
               type="date"
               placeholder={`Birth Date ${index + 1}`}
-              className="border p-2 rounded ml-2"
+              className='w-4/5 mb-4 rounded-md border-alter border-2 hover:border-2 hover:border-alter'
             />
             <select
               {...register(`children[${index}].gender`)}
-              className="border p-2 rounded ml-2"
+              className='w-4/5 mb-4 rounded-md border-alter border-2 hover:border-2 hover:border-alter'
             >
               <option value="">Select Gender</option>
               <option value="male">Male</option>
               <option value="female">Female</option>
             </select>
-            <label className="ml-2">
-              Studies
+            <label className="w-4/5 mb-4 p-2 rounded-md border-alter border-2 justify-center flex">
+              Is the child studied?
               <input
                 {...register(`children[${index}].studies`)}
                 type="checkbox"
-                className="ml-1"
+                className="ml-3 transform scale-150"
               />
             </label>
-            <button type="button" onClick={() => removeChildren(index)} className="px-2 py-1 bg-red-500 text-white rounded ml-2">
-              Remove
+            <button type="button" onClick={() => removeChildren(index)} className="px-2 py-1 bg-red-500 text-white rounded">
+              Remove child
             </button>
           </div>
         ))}
-        <button type="button" onClick={() => appendChildren({})} className="px-4 py-2 bg-blue-500 text-white rounded">
+        <button type="button" onClick={() => appendChildren({})} className="px-7 py-2 bg-blue-500 text-white rounded">
           Add Child
         </button>
       </div>

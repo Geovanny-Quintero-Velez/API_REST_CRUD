@@ -50,17 +50,24 @@ const UserDetailForm = () => {
   });
 
   return (
-    <form onSubmit={onSubmit} className="max-w-xl mx-auto mt-8 p-8 bg-white rounded shadow">
-      <LocationInput register={register} />
-      <hr></hr>
-      <ChildrenDataSection control={control} register={register}></ChildrenDataSection>
-      <hr></hr>
-      <HobbiesDataSection control={control} register={register}></HobbiesDataSection>
-      <hr></hr>
-      <InterestCategories register={register} />
-      <hr></hr>
-      <button type="submit" className="px-6 py-4 bg-red-500 text-white rounded ml-2">Send data</button>
-    </form>
+    <div className=' w-screen bg-primary flex justify-center '>
+      <div className='w-3/5 flex flex-col items-center bg-second mt-10 rounded-lg h-2/5 mb-4'>
+        <h1 className='py-7 font-bold text-white text-xl'>
+        Additional information
+        </h1>
+        <form onSubmit={onSubmit} className='bg-third w-4/5 flex flex-col items-center mb-4'>
+          <LocationInput register={register} />
+          <hr></hr>
+          <ChildrenDataSection control={control} register={register}></ChildrenDataSection>
+          <hr></hr>
+          <HobbiesDataSection control={control} register={register}></HobbiesDataSection>
+          <hr></hr>
+          <InterestCategories register={register} />
+          <hr></hr>
+          <button type="submit" className='py-2 px-10 bg-alter text-white rounded-lg hover:bg-third hover:text-alter hover:border-2 hover:border-alter font-semibold my-5'>Send data</button>
+        </form>
+      </div>
+    </div>
   );
 };
 
