@@ -125,13 +125,19 @@ const OrderPage = () => {
   };
 
   return (
-    <div>
+    <div className='w-screen'>
         <Nav></Nav>
-        <div>
-          <ListCategory categories={allCategories} selectedCategory={selectedCategory} onSelectedCategory={handleSelectedCategory} />
-          <button onClick={filterProducts}>Filter</button>
-          <ListProducts products={filteredProducts} onQuantityChange={handleQuantityChange} />
-          <button onClick={handlePurchase}>Buy</button>
+        <div className='h-screen w-screen bg-second flex items-center flex-col '>
+          <h1 className=' py-7 font-bold text-white text-xl'>
+          Product Catalog
+          </h1>
+          <div className=' w-4/5 p-3 bg-third rounded-md border-alter border-2 flex flex-col'>
+            <ListCategory categories={allCategories} selectedCategory={selectedCategory} onSelectedCategory={handleSelectedCategory} filterProducts={filterProducts} />
+            <hr className='border-t-2 border-red-500 my-4'/>
+            <ListProducts products={filteredProducts} onQuantityChange={handleQuantityChange} />
+            <hr className='border-t-2 border-red-500 my-4'/>
+            <button onClick={handlePurchase} className='py-2 bg-primary text-white rounded-lg hover:bg-alter font-semibold my-5'>Buy</button>
+          </div>
         </div>
     </div>
   )
