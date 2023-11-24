@@ -14,10 +14,10 @@ const ChildrenDataSection = ({ control, register, remove }) => {
   
 
   return (
-    <div className="mb-7 flex justify-center flex-wrap">
+    <div className="w-3/5 mb-7 justify-center flex flex-col items-center">
         <h3 className="text-lg font-semibold mb-4">Children</h3>
         {childrenFields.map((child, index) => (
-          <div key={child.id} className="mb-5 flex justify-center flex-wrap">
+          <div key={child.id} className="w-4/5 mb-5 justify-center flex flex-col items-center">
             <input
               {...register(`children[${index}].name`)}
               placeholder={`Name ${index + 1}`}

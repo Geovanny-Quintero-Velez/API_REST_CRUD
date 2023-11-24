@@ -127,7 +127,7 @@ const OrderPage = () => {
   return (
     <div className='w-screen'>
         <Nav></Nav>
-        <div className='h-screen w-screen bg-second flex items-center flex-col '>
+        <div className='h-screen w-screen bg-second flex items-center flex-col'>
           <h1 className=' py-7 font-bold text-white text-xl'>
           Product Catalog
           </h1>
