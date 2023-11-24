@@ -16,11 +16,10 @@ const productsMock = [
 
 const OrderPage = () => {
 
-  const [productos, setProductos] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState('all');
-  const [allCategories, setCategories] = useState(categoriesMock);
-  const [allProducts, setAllProducts] = useState(productsMock);
-  const [filteredProducts, setFilteredProducts] = useState(productsMock);
+  const [allCategories, setCategories] = useState([]);
+  const [allProducts, setAllProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
 
   const obtenerProductos = async () => {
     try {

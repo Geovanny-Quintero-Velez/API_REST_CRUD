@@ -1,14 +1,23 @@
 // InterestCategories.js
 import React, { useEffect, useState } from 'react';
+import { getCategories } from '../config/api';
 
 const InterestCategories = ({ register }) => {
   const [categories, setCategories] = useState([]);
 
+  const obtenerProductos = async () => {
+    try {
+
+      const categoriasBackend = await getCategories();
+
+      setCategories(categoriasBackend);
+    } catch (error) {
+      console.error('Error al obtener categorias:', error);
+    }
+  };
+  
   useEffect(() => {
-    // Puedes hacer una solicitud HTTP aquí para obtener las categorías desde el backend
-    // Por ahora, simplemente simulamos algunas categorías de ejemplo
-    const mockCategories = ['Electronics', 'Clothing', 'Home Appliances', 'Books', 'Toys'];
-    setCategories(mockCategories);
+    obtenerProductos();
   }, []);
 
   return (
