@@ -35,7 +35,9 @@ const OrderPage = () => {
 
       const categoriasBackend = await getCategories();
 
-      setCategories(categoriasBackend);
+      const categoriasNames = categoriasBackend.map(categoria => categoria.name);
+
+      setCategories(categoriasNames);
     } catch (error) {
       console.error('Error al obtener productos:', error);
     }
@@ -55,7 +57,7 @@ const OrderPage = () => {
       setFilteredProducts(allProducts);
     } else {
       // Filter by category
-      const filtered = allProducts.filter((product) => product.category === selectedCategory);
+      const filtered = allProducts.filter((product) => product.categoria.name === selectedCategory);
       setFilteredProducts(filtered);
     }
   };
@@ -67,12 +69,12 @@ const OrderPage = () => {
   const handleQuantityChange = (productId, change) => {
     setFilteredProducts((prevProducts) =>
       prevProducts.map((product) =>
-        product.id === productId ? { ...product, quantity: Math.max(0, product.quantity + change) } : product
+        product.codigoProducto === productId ? { ...product, quantity: Math.max(0, product.quantity + change) } : product
       )
     );
     setAllProducts((prevProducts) =>
       prevProducts.map((product) =>
-        product.id === productId ? { ...product, quantity: Math.max(0, product.quantity + change) } : product
+        product.codigoProducto === productId ? { ...product, quantity: Math.max(0, product.quantity + change) } : product
       )
     );
   };
@@ -100,9 +102,9 @@ const OrderPage = () => {
       const selectedProducts = allProducts.filter((product) => product.quantity > 0);
       const orderDetails = selectedProducts.map((product) => ({
         orderCode,
-        productCode: product.id,
+        productCode: product.codigoProducto,
         quantity: product.quantity,
-        price: product.price * product.quantity,
+        price: product.precioVenta * product.quantity,
       }));
   
       for (const orderDetail of orderDetails) {

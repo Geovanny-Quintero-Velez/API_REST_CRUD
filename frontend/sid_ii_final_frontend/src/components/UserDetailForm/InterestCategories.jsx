@@ -10,7 +10,9 @@ const InterestCategories = ({ register }) => {
 
       const categoriasBackend = await getCategories();
 
-      setCategories(categoriasBackend);
+      const categoriasNames = categoriasBackend.map(categoria => categoria.name);
+
+      setCategories(categoriasNames);
     } catch (error) {
       console.error('Error al obtener categorias:', error);
     }
