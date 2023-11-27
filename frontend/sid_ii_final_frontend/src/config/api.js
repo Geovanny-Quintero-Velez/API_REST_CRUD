@@ -6,7 +6,8 @@ const backend = axios.create({
 
 export const login = async (id) => {
     try {
-      const response = await backend.get(`/api/clientes/${id}`);
+      const numero = parseInt(id, 10);
+      const response = await backend.get(`/api/clientes/${numero}`);
       console.log(response.data)
 
       const userExists = response.data && response.data.id;
@@ -23,6 +24,7 @@ export const login = async (id) => {
 
 export const addDetail = async (userDetail) => {
   try {
+    console.log(userDetail);
     const response = await backend.post('/api/detalles-cliente', userDetail);
     return response.data;
   }catch(error){
@@ -41,7 +43,9 @@ export const updateDetail = async (id,userDetail) => {
 
 export const getDetail = async (id) => {
   try {
-    const response = await backend.get(`/api/detalles-cliente/${id}`);
+    console.log("id en el metodo de la api: " + id);
+    const cadena = id + "";
+    const response = await backend.get(`/api/detalles-cliente/${cadena}`);
     return response.data;
   }catch(error){
     throw error

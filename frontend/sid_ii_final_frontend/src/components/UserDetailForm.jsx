@@ -19,16 +19,17 @@ const UserDetailForm = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      children: [{ nombre: '', edad: '', genero: '' }],
-      hobbies: [],
-      location: { city: '', state: '', country: '' },
-      interestCategories: [],
+      hijos: [{ nombre: '', edad: '', genero: '' }],
+      pasatiempos: [],
+      residencia: { ciudad: '', estado: '', pais: '' },
+      categoriasDeInteres: [],
     },
   });
 
   const navigate = useNavigate()
 
   const id = localStorage.getItem('id');
+  console.log("valor de ID" + id);
 
   const onSubmit = handleSubmit(async data => {
     const response = await getDetail(id);
@@ -40,6 +41,7 @@ const UserDetailForm = () => {
             autoClose: 1000,
         })
     }else{
+      console.log(data);
       await addDetail(data)
       toast.success('Detail has been created succesfully',{
         position: "top-center",
@@ -69,6 +71,10 @@ const UserDetailForm = () => {
       </div>
     </div>
   );
+
+  
 };
+
+
 
 export default UserDetailForm;

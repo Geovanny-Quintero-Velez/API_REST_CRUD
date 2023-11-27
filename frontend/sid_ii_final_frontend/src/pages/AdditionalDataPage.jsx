@@ -1,6 +1,7 @@
 import React from 'react'
 import Nav from '../components/Nav';
 import UserDetailForm from '../components/UserDetailForm';
+import {addDetail} from '../config/api'
 
 const AdditionalDataPage = () => {
 
@@ -11,7 +12,7 @@ const AdditionalDataPage = () => {
   return (
     <div>
         <Nav></Nav>
-        <UserDetailForm></UserDetailForm>
+        <UserDetailForm addDetail={addDetail}></UserDetailForm>
     </div>
   )
 }

@@ -23,7 +23,7 @@ const RoutesC = () => {
     <Router>
       <Routes>
         <Route path="/login" element={<Login></Login>} />
-        <Route path='/' element={isToken() ? <Navigate to='/welcome'></Navigate>:<Login></Login>}></Route>
+        <Route path='/' element={<Navigate to='/login'></Navigate>}></Route>
         <Route
           path="/*"
           element={

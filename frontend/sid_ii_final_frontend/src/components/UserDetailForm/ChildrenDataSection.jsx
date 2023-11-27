@@ -8,7 +8,7 @@ const ChildrenDataSection = ({ control, register, remove }) => {
     remove: removeChildren,
   } = useFieldArray({
     control,
-    name: 'children',
+    name: 'hijos',
   });
 
   
@@ -19,18 +19,18 @@ const ChildrenDataSection = ({ control, register, remove }) => {
         {childrenFields.map((child, index) => (
           <div key={child.id} className="w-4/5 mb-5 justify-center flex flex-col items-center">
             <input
-              {...register(`children[${index}].name`)}
+              {...register(`hijos[${index}].nombre`)}
               placeholder={`Name ${index + 1}`}
               className='w-4/5 mb-4 rounded-md border-alter border-2 hover:border-2 hover:border-alter'
             />
             <input
-              {...register(`children[${index}].birthDate`)}
+              {...register(`hijos[${index}].fechaNacimiento`)}
               type="date"
               placeholder={`Birth Date ${index + 1}`}
               className='w-4/5 mb-4 rounded-md border-alter border-2 hover:border-2 hover:border-alter'
             />
             <select
-              {...register(`children[${index}].gender`)}
+              {...register(`hijos[${index}].genero`)}
               className='w-4/5 mb-4 rounded-md border-alter border-2 hover:border-2 hover:border-alter'
             >
               <option value="">Select Gender</option>
@@ -40,7 +40,7 @@ const ChildrenDataSection = ({ control, register, remove }) => {
             <label className="w-4/5 mb-4 p-2 rounded-md border-alter border-2 justify-center flex">
               Is the child studied?
               <input
-                {...register(`children[${index}].studies`)}
+                {...register(`hijos[${index}].studying`)}
                 type="checkbox"
                 className="ml-3 transform scale-150"
               />

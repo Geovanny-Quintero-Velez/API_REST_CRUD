@@ -16,6 +16,6 @@ public class DetallesCliente {
     private List<Hijo> hijos;
     private Lugar residencia;
     private List<String> pasatiempos;
-    private List<Long> categoriasDeInteres;
+    private List<String> categoriasDeInteres;
 }
 

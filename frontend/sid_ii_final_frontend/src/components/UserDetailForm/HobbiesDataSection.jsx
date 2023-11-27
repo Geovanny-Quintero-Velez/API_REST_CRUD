@@ -8,7 +8,7 @@ const HobbiesDataSection = ({ control, register, remove }) => {
     remove: removeHobbies,
   } = useFieldArray({
     control,
-    name: 'hobbies',
+    name: 'pasatiempos',
   });
 
   return (
@@ -17,7 +17,7 @@ const HobbiesDataSection = ({ control, register, remove }) => {
         {hobbiesFields.map((hobby, index) => (
           <div key={hobby.id} className="mb-5 flex justify-center flex-wrap">
             <input
-              {...register(`hobbies[${index}]`)}
+              {...register(`pasatiempos[${index}]`)}
               placeholder={`Hobby ${index + 1}`}
               className='w-4/5 mb-4 rounded-md border-alter border-2 hover:border-2 hover:border-alter'
             />

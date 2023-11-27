@@ -1,6 +1,6 @@
 // InterestCategories.js
 import React, { useEffect, useState } from 'react';
-import { getCategories } from '../config/api';
+import { getCategories } from '../../config/api';
 
 const InterestCategories = ({ register }) => {
   const [categories, setCategories] = useState([]);
@@ -31,7 +31,7 @@ const InterestCategories = ({ register }) => {
           <label key={category} className="flex items-center">
             <input
               type="checkbox"
-              {...register('interestCategories')}
+              {...register('categoriasDeInteres')}
               value={category}
               className="mr-2 transform scale-150"
             />
