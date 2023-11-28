@@ -5,7 +5,7 @@ import OrderCard from './OrderCard';
 const OrderList = () => {
     const [orders, setOrders] = useState([]);
 
-    const codigoCliente = parseInt(localStorage.getItem('user'),10);
+    const codigoCliente = parseInt(localStorage.getItem('id'),10);
 
     useEffect(() => {
    
