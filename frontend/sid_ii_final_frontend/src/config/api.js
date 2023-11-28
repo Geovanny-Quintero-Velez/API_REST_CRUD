@@ -63,6 +63,7 @@ export const addOrderDetail = async (orderDetail) => {
 
 export const addOrder = async (order) => {
   try {
+    console.log(order);
     const response = await backend.post('/api/ordenes', order);
     return response.data;
   }catch(error){

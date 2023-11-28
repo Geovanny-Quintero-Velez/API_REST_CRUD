@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 const categoriesMock = ['Electronics', 'Clothing', 'Home', 'Books', 'Toys'];
 
 const productsMock = [
-  { id: 1, description: 'Product 1', category: 'Electronics', quantity: 0,  },
+  { id: 1, description: 'Product 1', category: 'Electronics', quantity: 0, },
   { id: 2, description: 'Product 2', category: 'Clothing', quantity: 0 },
   { id: 3, description: 'Product 3', category: 'Home', quantity: 0 },
   // ... other products
@@ -27,7 +27,7 @@ const OrderPage = () => {
 
       const productosFrontend = productosBackend.map((producto) => ({
         ...producto,
-        quantity: 0, 
+        quantity: 0,
       }));
 
       setAllProducts(productosFrontend);
@@ -48,7 +48,7 @@ const OrderPage = () => {
   }, []);
 
   const handleLogout = () => {
-    window.location.href = '/'; 
+    window.location.href = '/';
   };
 
   const filterProducts = () => {
@@ -89,30 +89,30 @@ const OrderPage = () => {
     const orderCode = generateOrderCode();
 
     const order = {
-      orderCode,
-      clientCode: localStorage.getItem('id'),
-      orderDate: new Date(),
-      deliverDate: new Date(),
-      paymentDate: new Date(),
+      numeroOrden: orderCode,
+      codigoCliente: parseInt(localStorage.getItem('id')),
+      fechaOrden: new Date(),
+      fechaEnvio: new Date(),
+      fechaPago: new Date(),
     };
-  
+
     try {
       const orderResponse = await addOrder(order);
-  
+
       const selectedProducts = allProducts.filter((product) => product.quantity > 0);
       const orderDetails = selectedProducts.map((product) => ({
-        orderCode,
-        productCode: product.codigoProducto,
-        quantity: product.quantity,
-        price: product.precioVenta * product.quantity,
+        numeroOrden: orderCode,
+        productId: product.codigoProducto,
+        cantidad: product.quantity,
+        precio: product.precioVenta * product.quantity,
       }));
-  
+
       for (const orderDetail of orderDetails) {
         await addOrderDetail(orderDetail);
       }
-  
+
       console.log('Compra realizada con éxito');
-      toast.success('Purchase and Order has been created succesfully',{
+      toast.success('Purchase and Order has been created succesfully', {
         position: "top-center",
         autoClose: 1000,
       })
@@ -120,26 +120,26 @@ const OrderPage = () => {
       console.error('Error al realizar la compra:', error);
       toast.error('Ocurrio un error', {
         position: "top-center",
-        autoClose: 1000, 
+        autoClose: 1000,
       });
     }
   };
 
   return (
     <div className='w-screen'>
-        <Nav></Nav>
-        <div className='h-screen w-screen bg-second flex items-center flex-col'>
-          <h1 className=' py-7 font-bold text-white text-xl'>
+      <Nav></Nav>
+      <div className='h-screen w-screen bg-second flex items-center flex-col'>
+        <h1 className=' py-7 font-bold text-white text-xl'>
           Product Catalog
-          </h1>
-          <div className=' w-4/5 p-3 bg-third rounded-md border-alter border-2 flex flex-col'>
-            <ListCategory categories={allCategories} selectedCategory={selectedCategory} onSelectedCategory={handleSelectedCategory} filterProducts={filterProducts} />
-            <hr className='border-t-2 border-red-500 my-4'/>
-            <ListProducts products={filteredProducts} onQuantityChange={handleQuantityChange} />
-            <hr className='border-t-2 border-red-500 my-4'/>
-            <button onClick={handlePurchase} className='py-2 bg-primary text-white rounded-lg hover:bg-alter font-semibold my-5'>Buy</button>
-          </div>
+        </h1>
+        <div className=' w-4/5 p-3 bg-third rounded-md border-alter border-2 flex flex-col'>
+          <ListCategory categories={allCategories} selectedCategory={selectedCategory} onSelectedCategory={handleSelectedCategory} filterProducts={filterProducts} />
+          <hr className='border-t-2 border-red-500 my-4' />
+          <ListProducts products={filteredProducts} onQuantityChange={handleQuantityChange} />
+          <hr className='border-t-2 border-red-500 my-4' />
+          <button onClick={handlePurchase} className='py-2 bg-primary text-white rounded-lg hover:bg-alter font-semibold my-5'>Buy</button>
         </div>
+      </div>
     </div>
   )
 }
