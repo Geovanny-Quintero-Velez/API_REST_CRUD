@@ -4,10 +4,13 @@ import OrderCard from './OrderCard';
 
 const OrderList = () => {
     const [orders, setOrders] = useState([]);
+
+    const codigoCliente = parseInt(localStorage.getItem('user'),10);
+
     useEffect(() => {
    
         try{
-            getOrders() 
+          getOrdersByClient(codigoCliente) 
             .then((data) => {
                 setOrders(data);
           })

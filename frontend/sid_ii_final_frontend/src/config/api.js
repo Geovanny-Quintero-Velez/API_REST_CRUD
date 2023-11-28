@@ -88,6 +88,15 @@ export const getCategories = async () => {
   }
 }
 
+export const getOrdersByClient = async (codigoCliente) => {
+  try {
+    const response = await backend.get(`/api/ordenes/${codigoCliente}`);
+    return response.data;
+  }catch(error){
+    throw error
+  }
+}
+
 export const getOrder = async (id) => {
   try {
     const response = await backend.get(`/api/ordenes/${id}`);
