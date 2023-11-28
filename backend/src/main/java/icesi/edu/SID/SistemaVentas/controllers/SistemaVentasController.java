@@ -149,6 +149,12 @@ public class SistemaVentasController {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+    @GetMapping("ordenes/{codigoCliente}")
+    public ResponseEntity<List<Orden>> obtenerOrdenesPorCliente(@PathVariable Long codigoCliente) {
+        List<Orden> ordenes = ordenService.obtenerOrdenesPorCliente(codigoCliente);
+        return new ResponseEntity<>(ordenes, HttpStatus.OK);
+    }
+
     // Endpoint para actualizar un cliente por ID
     @PutMapping("ordenes/{id}")
     public ResponseEntity<Orden> actualizarOrden(@PathVariable Long id, @RequestBody OrdenCompleta ordenCompleta) {
@@ -206,6 +212,12 @@ public class SistemaVentasController {
         }
 
         return new ResponseEntity<>(detalleOrdenCreado, HttpStatus.CREATED);
+    }
+
+    @GetMapping("ordenes-detalle/{numeroOrden}")
+    public ResponseEntity<List<DetalleOrden>> obtenerDetallesPorNumeroOrden(@PathVariable Long numeroOrden) {
+        List<Orden> detalles = detalleOrdenService.obtenerDetallesPorNumeroOrden(numeroOrden);
+        return new ResponseEntity<>(detalles, HttpStatus.OK);
     }
 
     //------- productos -------

@@ -7,6 +7,7 @@ import Login from './Login';
 import Welcome from '../pages/Welcome';
 import AdditionalDataPage from '../pages/AdditionalDataPage';
 import OrderPage from '../pages/OrderPage';
+import ListOrderPage from '../pages/ListOrderPage';
 
 function isToken(){
   const tok = localStorage.getItem('token')
@@ -32,6 +33,8 @@ const RoutesC = () => {
                 <Route path="/welcome" element={<Welcome></Welcome>} />
                 <Route path="/addData" element={<AdditionalDataPage></AdditionalDataPage>} />
                 <Route path="/makeOrder" element={<OrderPage></OrderPage>} />
+                <Route path="/listOrders" element={<ListOrderPage></ListOrderPage>} />
+                <Route path="/Order/:id" element={<OrderDetailPage></OrderDetailPage>} />
               </Routes>}
             />
           }

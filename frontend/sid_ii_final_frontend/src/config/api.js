@@ -88,3 +88,21 @@ export const getCategories = async () => {
     throw error
   }
 }
+
+export const getOrder = async (id) => {
+  try {
+    const response = await backend.get(`/api/ordenes/${id}`);
+    return response.data;
+  }catch(error){
+    throw error
+  }
+}
+
+export const getOrderDetails = async (id) => {
+  try {
+    const response = await backend.get(`ordenes-detalle/${id}`);
+    return response.data;
+  }catch(error){
+    throw error
+  }
+}

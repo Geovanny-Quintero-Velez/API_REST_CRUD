@@ -24,7 +24,7 @@ const OrderList = () => {
         {orders.length > 0 ? (
       <div className='grid grid-cols-1 w-full ml-20'>
         {orders.map((order) => (
-          <OrderCard film={order} key={order.numeroOrden} />
+          <OrderCard order={order} key={order.numeroOrden} />
         ))}
       </div>
     ) : (

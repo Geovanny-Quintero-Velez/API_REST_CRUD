@@ -42,5 +42,10 @@ public class DetalleOrdenServiceImpl implements DetalleOrdenService{
     public void eliminarDetalleOrden(DetalleOrdenId id) {
         detalleOrdenRepository.deleteById(id);
     }
+
+    @Override
+    public List<DetalleOrden> obtenerDetallesPorNumeroOrden(Long numeroOrden) {
+        return detalleOrdenRepository.findByNumeroOrden(numeroOrden);
+    }
     
 }
