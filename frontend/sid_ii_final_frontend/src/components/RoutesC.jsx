@@ -7,6 +7,7 @@ import Login from './Login';
 import Welcome from '../pages/Welcome';
 import AdditionalDataPage from '../pages/AdditionalDataPage';
 import OrderPage from '../pages/OrderPage';
+import OrderDetailPage  from '../pages/OrderDetailPage';
 import ListOrderPage from '../pages/ListOrderPage';
 
 function isToken(){

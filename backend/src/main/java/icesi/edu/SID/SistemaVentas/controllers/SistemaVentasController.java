@@ -149,7 +149,7 @@ public class SistemaVentasController {
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @GetMapping("ordenes/{codigoCliente}")
+    @GetMapping("clientes/{codigoCliente}/ordenes")
     public ResponseEntity<List<Orden>> obtenerOrdenesPorCliente(@PathVariable Long codigoCliente) {
         List<Orden> ordenes = ordenService.obtenerOrdenesPorCliente(codigoCliente);
         return new ResponseEntity<>(ordenes, HttpStatus.OK);
@@ -216,7 +216,7 @@ public class SistemaVentasController {
 
     @GetMapping("ordenes-detalle/{numeroOrden}")
     public ResponseEntity<List<DetalleOrden>> obtenerDetallesPorNumeroOrden(@PathVariable Long numeroOrden) {
-        List<Orden> detalles = detalleOrdenService.obtenerDetallesPorNumeroOrden(numeroOrden);
+        List<DetalleOrden> detalles = detalleOrdenService.obtenerDetallesPorNumeroOrden(numeroOrden);
         return new ResponseEntity<>(detalles, HttpStatus.OK);
     }
 

@@ -20,7 +20,7 @@ const WelcomeOptions = () => {
       <button onClick={() => goPage(1)} className="bg-alter text-white font-semibold py-4 px-8 mb-4 hover:bg-gray-50 hover:text-alter hover:font-semibold hover:border-alter hover:border rounded-md">
         Enter Additional User Data
       </button>
-      <button onClick={() => goPage(2)} className="bg-alter text-white font-semibold py-4 px-8 hover:bg-gray-50 hover:text-alter hover:font-semibold hover:border-alter hover:border rounded-md">
+      <button onClick={() => goPage(2)} className="bg-alter text-white font-semibold py-4 px-8 mb-4 hover:bg-gray-50 hover:text-alter hover:font-semibold hover:border-alter hover:border rounded-md">
         Make an Order
       </button>
       <button onClick={() => goPage(3)} className="bg-alter text-white font-semibold py-4 px-8 hover:bg-gray-50 hover:text-alter hover:font-semibold hover:border-alter hover:border rounded-md">

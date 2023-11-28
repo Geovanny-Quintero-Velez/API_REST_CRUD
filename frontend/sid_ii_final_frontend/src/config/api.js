@@ -91,7 +91,7 @@ export const getCategories = async () => {
 
 export const getOrdersByClient = async (codigoCliente) => {
   try {
-    const response = await backend.get(`/api/ordenes/${codigoCliente}`);
+    const response = await backend.get(`/api/clientes/${codigoCliente}/ordenes`);
     return response.data;
   }catch(error){
     throw error
@@ -109,7 +109,9 @@ export const getOrder = async (id) => {
 
 export const getOrderDetails = async (id) => {
   try {
-    const response = await backend.get(`ordenes-detalle/${id}`);
+    console.log("id que se está mandando "+id);
+    const numero = parseInt(id, 10);
+    const response = await backend.get(`/api/ordenes-detalle/${numero}`);
     return response.data;
   }catch(error){
     throw error

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getOrders } from '../config/api'
+import { getOrdersByClient } from '../config/api'
 import OrderCard from './OrderCard';
 
 const OrderList = () => {

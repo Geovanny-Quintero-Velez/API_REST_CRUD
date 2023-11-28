@@ -2,7 +2,7 @@ import Nav from '../components/Nav';
 import React, { useState, useEffect } from 'react';
 import ListCategory from '../components/OrderPageComponents/ListCategory';
 import ListProducts from '../components/OrderPageComponents/ListProducts';
-import { addOrder, addOrderDetail, getProducts, getCategories } from '../config/api';
+import { addOrder, addOrderDetail, getProducts, getCategories, getDetail } from '../config/api';
 import { toast } from 'react-toastify';
 
 const categoriesMock = ['Electronics', 'Clothing', 'Home', 'Books', 'Toys'];
@@ -100,11 +100,19 @@ const OrderPage = () => {
       const orderResponse = await addOrder(order);
 
       const selectedProducts = allProducts.filter((product) => product.quantity > 0);
+      var mul = 1
+      const id = localStorage.getItem('id');
+      const response = await getDetail(id);
+      const dataExist = (response)? true : false;
+      if(dataExist){
+        mul=0.9
+      }
+      
       const orderDetails = selectedProducts.map((product) => ({
         numeroOrden: orderCode,
         productId: product.codigoProducto,
         cantidad: product.quantity,
-        precio: product.precioVenta * product.quantity,
+        precio: product.precioVenta * product.quantity * mul,
       }));
 
       for (const orderDetail of orderDetails) {

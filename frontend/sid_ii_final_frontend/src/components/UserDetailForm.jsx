@@ -19,6 +19,7 @@ const UserDetailForm = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
+      id: parseInt(localStorage.getItem('id'),10),
       hijos: [{ nombre: '', edad: '', genero: '' }],
       pasatiempos: [],
       residencia: { ciudad: '', estado: '', pais: '' },
