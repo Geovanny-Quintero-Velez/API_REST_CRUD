@@ -117,6 +117,7 @@ public class SistemaVentasController {
 
         Orden nuevaOrden = new Orden();
         nuevaOrden.setNumeroOrden(ordenCompleta.getNumeroOrden());
+        System.out.println("**************************"+clienteService.obtenerClientePorId(ordenCompleta.getCodigoCliente()));
         Optional<Cliente> cliente = clienteService.obtenerClientePorId(ordenCompleta.getCodigoCliente());
         if (cliente.isPresent())
             nuevaOrden.setCliente(cliente.get());
