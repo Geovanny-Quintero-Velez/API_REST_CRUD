@@ -10,6 +10,8 @@ const WelcomeOptions = () => {
         navigate('/addData')
         }else if(num==2){
         navigate('/makeOrder')  
+        }else if(num==3){
+          navigate('/listOrders')  
         }
       }
 
@@ -20,6 +22,9 @@ const WelcomeOptions = () => {
       </button>
       <button onClick={() => goPage(2)} className="bg-alter text-white font-semibold py-4 px-8 hover:bg-gray-50 hover:text-alter hover:font-semibold hover:border-alter hover:border rounded-md">
         Make an Order
+      </button>
+      <button onClick={() => goPage(3)} className="bg-alter text-white font-semibold py-4 px-8 hover:bg-gray-50 hover:text-alter hover:font-semibold hover:border-alter hover:border rounded-md">
+        View my Orders
       </button>
     </div>
   );
