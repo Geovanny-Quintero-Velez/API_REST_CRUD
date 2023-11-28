@@ -12,6 +12,8 @@ public interface OrdenService {
 
     public Optional<Orden> obtenerOrdenPorId(Long id);
 
+    public List<Orden> obtenerOrdenesPorCliente(Long codigoCliente);
+
     public Orden actualizarOrden(Long id, Orden nuevaOrden);
 
     public void eliminarOrden(Long id);

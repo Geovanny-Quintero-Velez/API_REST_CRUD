@@ -31,6 +31,11 @@ public class OrdenServiceImpl implements OrdenService{
     }
 
     @Override
+    public List<Orden> obtenerOrdenesPorCliente(Long codigoCliente) {
+        return ordenRepository.findByCodigoCliente(codigoCliente);
+    }
+
+    @Override
     public Orden actualizarOrden(Long id, Orden nuevaOrden) {
         return ordenRepository.findById(id).map(orden -> {
             return ordenRepository.save(nuevaOrden);

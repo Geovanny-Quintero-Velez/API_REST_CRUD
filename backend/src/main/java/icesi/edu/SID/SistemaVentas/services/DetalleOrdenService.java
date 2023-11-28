@@ -16,4 +16,6 @@ public interface DetalleOrdenService {
     public DetalleOrden actualizarDetalleOrden(DetalleOrdenId id, DetalleOrden nuevoDetalleOrden);
 
     public void eliminarDetalleOrden(DetalleOrdenId id);
+
+    public List<DetalleOrden> obtenerDetallesPorNumeroOrden(Long numeroOrden);
 }

@@ -8,5 +8,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DetalleOrdenRepository extends JpaRepository<DetalleOrden, DetalleOrdenId> {
-    // Métodos personalizados si es necesario
+    @Query("SELECT d FROM DetalleOrden d WHERE d.orden.numeroOrden = :numeroOrden")
+    List<DetalleOrden> findByNumeroOrden(@Param("numeroOrden") Long numeroOrden);
 }
